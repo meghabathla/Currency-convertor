@@ -19,7 +19,6 @@ function InputBox({
           htmlFor={amountInputId}
           className=" text-black/40 mb-2 inline-block"
         >
-          {" "}
           {label}
         </label>
         <input
