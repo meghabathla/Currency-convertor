@@ -4,15 +4,19 @@ function useCurrencyInfo(currency) {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    fetch(
-      `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${currency}.json`
-    )
-      .then((res) => res.json())
-      .then((res) => setData(res[currency]));
-    console.log(data);
+    const fetchdata = async () => {
+      try {
+        const response = await fetch(
+          `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${currency}.json`
+        );
+        const responseData = await response.json();
+        setData(responseData[currency]);
+      } catch (error) {
+        console.log(`API Error in fetching currency data: ${error}`);
+      }
+    };
+    fetchdata();
   }, [currency]);
-
-  console.log(data);
 
   return data;
 }
